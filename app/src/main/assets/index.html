@@ -5,7 +5,7 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f4f8ff;font:16px system-ui,-apple-system,sans-serif}header{padding:20px 18px 14px;border-bottom:1px solid var(--line);background:#08172a;position:sticky;top:0;z-index:2}h1{margin:0;font-size:25px}h1 span{color:var(--green)}header p{margin:4px 0 0;color:var(--muted);font-size:13px}.wrap{padding:16px;max-width:720px;margin:auto}.tabs{display:flex;gap:6px;margin-bottom:16px}.tabs button{flex:1;background:#102039;color:#b4c4df;padding:11px 5px;border:1px solid var(--line);border-radius:12px}.tabs button.active{background:#124438;color:var(--green);border-color:#16785e}.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px}h2{font-size:19px;margin:0 0 16px}label{display:block;color:#c4d4ed;font-size:14px;font-weight:600;margin:14px 0 7px}input,select{width:100%;padding:13px;border:1px solid #355578;border-radius:11px;background:#09172a;color:white;font-size:17px;outline:none}input:focus,select:focus{border-color:var(--green)}.small{color:#8199bb;font-size:12px;margin-top:6px}.sliderrow{display:flex;justify-content:space-between;align-items:center}.pct{font-size:20px;color:var(--green);font-weight:800}input[type=range]{padding:0;accent-color:var(--green);margin:10px 0}.scale{display:flex;justify-content:space-between;color:#8199bb;font-size:12px}.btn{width:100%;border:0;border-radius:12px;padding:14px;background:var(--green);color:#06251c;font-size:16px;font-weight:800;margin-top:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{padding:13px;border-radius:13px;background:#0c2340;border:1px solid #1689ed}.metric.green{background:#082d2c;border-color:#13d6a0}.metric.purple{grid-column:1/-1;background:#111e3b;border-color:#7651d9}.metric .label{font-size:12px;color:#b7cde9;margin-bottom:7px}.value{font-size:25px;font-weight:800;overflow-wrap:anywhere}.green .value{color:var(--green)}.metric:not(.green):not(.purple) .value{color:white}.purple .value{color:var(--green);font-size:28px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.bar{height:9px;background:#20334f;border-radius:9px;overflow:hidden;margin:7px 0 14px}.fill{height:100%;border-radius:9px;background:var(--green)}.fill.blue{background:var(--blue)}.status{display:flex;gap:10px;align-items:flex-start;padding-top:10px}.status strong{display:block;margin-bottom:3px}.secondary{background:#102039;color:#c4d4ed;border:1px solid var(--line)}.tip,.historyitem{padding:14px;border:1px solid var(--line);border-radius:13px;margin:10px 0;background:#0a192d}.tip strong{display:block;margin-bottom:6px}.hidden{display:none}.historyitem small{display:block;color:var(--muted);margin-top:5px}.empty{text-align:center;color:var(--muted);padding:24px}.foot{text-align:center;color:#7188a8;font-size:11px;padding:12px}@media(min-width:600px){.wrap{padding:24px}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}}
 </style></head><body>
 <header><h1>⚽ Prediction <span>Edge</span> ↗</h1><p>Calculate your edge. Bet smarter.</p></header>
-<main class="wrap"><nav class="tabs"><button class="active" data-tab="calc">Calculator</button><button data-tab="tips">Tips</button><button data-tab="history">History</button></nav>
+<main class="wrap"><nav class="tabs"><button class="active" data-tab="calc">Calculator</button><button data-tab="intel">Football Intel</button><button data-tab="tips">Tips</button><button data-tab="history">History</button></nav>
 <section id="calc">
 <div class="split"><div class="panel"><h2>▦ Edge calculator</h2>
 <label for="match">Match (optional)</label><input id="match" placeholder="e.g. Arsenal vs Chelsea">
@@ -20,6 +20,46 @@
 <div class="metric purple"><div class="label">Expected net return per bet</div><div class="value" id="ev">+₦73.70</div><div class="muted" id="roi">Expected ROI: 7.37%</div><div class="muted" id="payout">Potential payout: ₦1,900.00</div><p class="muted">Long-run estimate, not a guarantee for this single game.</p></div></div>
 <div class="panel" style="margin:12px 0 0;padding:13px"><div class="sliderrow"><span class="muted">Your probability</span><strong id="youlabel" style="color:var(--green)">60%</strong></div><div class="bar"><div class="fill" id="youbar" style="width:60%"></div></div><div class="sliderrow"><span class="muted">Break-even probability</span><strong id="marketlabel" style="color:var(--blue)">52.63%</strong></div><div class="bar"><div class="fill blue" id="marketbar" style="width:52.63%"></div></div><div class="status"><span id="statusicon">✓</span><div><strong id="statustitle">Potential value</strong><div id="statusdesc" class="muted">Your estimate is above break-even. Validate your model.</div></div></div></div></div></div>
 </section>
+
+<section id="intel" class="hidden">
+<div class="panel">
+  <h2>⚽ Football prediction intelligence</h2>
+  <p class="muted">Estimate 1X2 probabilities from your expected-goals inputs. Enter xG estimates using recent form, home/away performance, injuries and tactical matchup. This tool does not fetch live stats automatically.</p>
+  <label for="homeTeam">Home team</label><input id="homeTeam" placeholder="e.g. Arsenal">
+  <label for="awayTeam">Away team</label><input id="awayTeam" placeholder="e.g. Chelsea">
+  <div class="grid">
+    <div><label for="homeXg">Home expected goals (xG)</label><input id="homeXg" type="number" min="0.1" max="5" step="0.05" value="1.55"></div>
+    <div><label for="awayXg">Away expected goals (xG)</label><input id="awayXg" type="number" min="0.1" max="5" step="0.05" value="1.05"></div>
+  </div>
+  <p class="small">Use realistic pre-match estimates, typically around 0.2–3.0. These are your inputs, not live data from a provider.</p>
+  <h2 style="margin-top:18px">Bookmaker 1X2 odds (optional)</h2>
+  <div class="grid">
+    <div><label for="homeOdds">Home win odds</label><input id="homeOdds" type="number" min="1.01" step="0.01" value="2.10"></div>
+    <div><label for="drawOdds">Draw odds</label><input id="drawOdds" type="number" min="1.01" step="0.01" value="3.30"></div>
+    <div><label for="awayOdds">Away win odds</label><input id="awayOdds" type="number" min="1.01" step="0.01" value="3.60"></div>
+  </div>
+  <button class="btn" id="runIntel">Calculate football probabilities</button>
+</div>
+<div class="panel">
+  <h2>📊 Model output</h2>
+  <div class="grid">
+    <div class="metric green"><div class="label">Home win</div><div class="value" id="pHome">—</div><div class="muted" id="fairHome">Fair odds: —</div></div>
+    <div class="metric"><div class="label">Draw</div><div class="value" id="pDraw">—</div><div class="muted" id="fairDraw">Fair odds: —</div></div>
+    <div class="metric"><div class="label">Away win</div><div class="value" id="pAway">—</div><div class="muted" id="fairAway">Fair odds: —</div></div>
+    <div class="metric purple"><div class="label">Most likely score</div><div class="value" id="scoreline">—</div><div class="muted" id="scoreNote">Based on the highest individual score probability.</div></div>
+  </div>
+  <div class="tip"><strong id="intelVerdict">Enter inputs and calculate</strong><div id="intelExplain" class="muted">Probabilities are estimates, not guarantees.</div></div>
+  <h2 style="margin-top:18px">Value check vs your odds</h2>
+  <div id="valueRows" class="muted">Calculate to compare model probabilities with bookmaker odds.</div>
+  <h2 style="margin-top:18px">Other goal markets</h2>
+  <div class="grid">
+    <div class="metric"><div class="label">Over 2.5 goals</div><div class="value" id="over25">—</div></div>
+    <div class="metric"><div class="label">Both teams to score</div><div class="value" id="btts">—</div></div>
+  </div>
+  <p class="small">Model confidence is limited by the quality of the xG estimates and ignores lineup changes unless reflected in your inputs. Positive edge is not proof of a profitable bet.</p>
+</div>
+</section>
+
 <section id="tips" class="hidden"><div class="panel"><h2>How to find a real edge</h2><div class="tip"><strong>01 · Build your probability</strong><div class="muted">Use recent xG, opponent strength, home/away splits, injuries and tactical matchups. Don't guess just to make a bet look valuable.</div></div><div class="tip"><strong>02 · Compare the whole market</strong><div class="muted">For 1X2, compare all three outcomes and remove the bookmaker's overround to estimate fair market probabilities.</div></div><div class="tip"><strong>03 · Track calibration</strong><div class="muted">Record estimates and actual outcomes. If 60% picks win far less often over a large sample, your model may be overconfident.</div></div><div class="tip"><strong>04 · Protect your bankroll</strong><div class="muted">Positive expected value does not prevent losing streaks. Set a budget and never chase losses or stake essential money.</div></div></div></section>
 <section id="history" class="hidden"><div class="panel"><h2>Saved analyses</h2><p class="muted">Saved locally on this device.</p><div id="historylist" class="empty">No saved analyses yet.</div><button class="btn secondary" id="clearhistory">Clear history</button></div></section>
 <div class="foot">Prediction Edge · Educational tool · No guaranteed wins</div></main>
@@ -28,11 +68,69 @@ const $=id=>document.getElementById(id);const fmt=n=>Number(n).toLocaleString('e
 function calculate(){let o=+$('odds').value,p=+$('prob').value,s=+$('stake').value;$('pct').textContent=p+'%';if(!Number.isFinite(o)||o<=1||!Number.isFinite(s)||s<=0){$('breakeven').textContent='—';$('edge').textContent='—';$('ev').textContent='—';$('statustitle').textContent='Check your inputs';$('statusdesc').textContent='Odds must be greater than 1 and stake must be positive.';return}
 let b=100/o,e=p-b,v=s*(p/100*o-1);$('breakeven').textContent=b.toFixed(2)+'%';$('formula').textContent='(1 / '+o.toFixed(2)+')';$('edge').textContent=(e>0?'+':'')+e.toFixed(2)+' pp';$('edge').style.color=e>0?'var(--green)':e<0?'#ff8e9b':'white';$('ev').textContent=(v>0?'+':v<0?'−':'')+'₦'+fmt(Math.abs(v));$('roi').textContent='Expected ROI: '+(p*o/100-1>0?'+':'')+((p*o/100-1)*100).toFixed(2)+'%';$('payout').textContent='Potential total payout: ₦'+fmt(s*o);$('youlabel').textContent=p+'%';$('marketlabel').textContent=b.toFixed(2)+'%';$('youbar').style.width=p+'%';$('marketbar').style.width=Math.min(100,b)+'%';$('statustitle').textContent=e>=5?'Potential value':e>0?'Small estimated edge':e===0?'No estimated edge':'Negative estimated edge';$('statusicon').textContent=e>=5?'✓':e>0?'ℹ':'⚠';$('statusdesc').textContent=e>=5?'Your estimate is at least 5 percentage points above break-even. Check model calibration.':e>0?'Your estimated advantage is small and may disappear due to model error.':e===0?'Your estimate is at break-even before uncertainty.':'Odds do not offer value according to your estimate.'}
 ['odds','prob','stake'].forEach(id=>$(id).addEventListener('input',calculate));calculate();
-document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));['calc','tips','history'].forEach(id=>$(id).classList.toggle('hidden',id!==btn.dataset.tab));if(btn.dataset.tab==='history')renderHistory()}));
+document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));['calc','intel','tips','history'].forEach(id=>$(id).classList.toggle('hidden',id!==btn.dataset.tab));if(btn.dataset.tab==='history')renderHistory()}));
 function getHistory(){try{return JSON.parse(localStorage.getItem('predictionEdgeHistory')||'[]')}catch(e){return []}}
 function renderHistory(){let arr=getHistory(),el=$('historylist');if(!arr.length){el.className='empty';el.textContent='No saved analyses yet.';return}el.className='';el.innerHTML=arr.map(x=>`<div class="historyitem"><strong>${escapeHtml(x.match||'Unnamed match')}</strong><small>${escapeHtml(x.market)} · Odds ${x.odds} · ${x.date}</small><p>Estimated probability: ${x.prob}% · Stake: ₦${fmt(x.stake)}</p><strong style="color:${x.ev>=0?'var(--green)':'#ff8e9b'}">Expected return: ${x.ev>=0?'+':'−'}₦${fmt(Math.abs(x.ev))} · Edge ${x.edge>0?'+':''}${x.edge.toFixed(2)} pp</strong></div>`).join('')}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 $('save').addEventListener('click',()=>{let o=+$('odds').value,p=+$('prob').value,s=+$('stake').value;if(!(o>1&&s>0)){alert('Enter valid odds and stake first.');return}let arr=getHistory();arr.unshift({match:$('match').value,market:$('market').value,odds:o,prob:p,stake:s,edge:p-100/o,ev:s*(p/100*o-1),date:new Date().toLocaleString()});localStorage.setItem('predictionEdgeHistory',JSON.stringify(arr.slice(0,100)));$('save').textContent='✓ Analysis saved';setTimeout(()=>$('save').textContent='Save analysis to history',1300)});
 $('clearhistory').addEventListener('click',()=>{if(confirm('Clear all saved analyses on this device?')){localStorage.removeItem('predictionEdgeHistory');renderHistory()}});
 $('reset').addEventListener('click',()=>{$('match').value='';$('market').selectedIndex=0;$('odds').value='1.90';$('prob').value=60;$('stake').value=1000;calculate()});
+
+function poissonProb(k, lambda) {
+  if (lambda <= 0) return k === 0 ? 1 : 0;
+  let p = Math.exp(-lambda);
+  for (let i = 1; i <= k; i++) p *= lambda / i;
+  return p;
+}
+function intelCalculate() {
+  const hx = Number($('homeXg').value), ax = Number($('awayXg').value);
+  const odds = [Number($('homeOdds').value), Number($('drawOdds').value), Number($('awayOdds').value)];
+  if (!Number.isFinite(hx) || !Number.isFinite(ax) || hx < 0.1 || ax < 0.1 || hx > 5 || ax > 5) {
+    $('intelVerdict').textContent = 'Check expected-goals inputs';
+    $('intelExplain').textContent = 'Enter home and away xG between 0.1 and 5.0.';
+    return;
+  }
+  const maxGoals = 10;
+  const hp = Array.from({length:maxGoals+1}, (_,k)=>poissonProb(k,hx));
+  const ap = Array.from({length:maxGoals+1}, (_,k)=>poissonProb(k,ax));
+  let ph=0,pd=0,pa=0,over=0,btts=0,best=-1,bestScore='—';
+  for(let h=0;h<=maxGoals;h++) for(let a=0;a<=maxGoals;a++){
+    const p=hp[h]*ap[a];
+    if(h>a) ph+=p; else if(h===a) pd+=p; else pa+=p;
+    if(h+a>=3) over+=p;
+    if(h>0 && a>0) btts+=p;
+    if(p>best){best=p;bestScore=`${h}–${a}`;}
+  }
+  const total=ph+pd+pa; ph/=total;pd/=total;pa/=total;
+  $('pHome').textContent=(ph*100).toFixed(1)+'%';
+  $('pDraw').textContent=(pd*100).toFixed(1)+'%';
+  $('pAway').textContent=(pa*100).toFixed(1)+'%';
+  $('fairHome').textContent='Fair odds: '+(1/ph).toFixed(2);
+  $('fairDraw').textContent='Fair odds: '+(1/pd).toFixed(2);
+  $('fairAway').textContent='Fair odds: '+(1/pa).toFixed(2);
+  $('scoreline').textContent=bestScore;
+  $('scoreNote').textContent=`Highest single score probability: ${(best*100).toFixed(1)}%. Exact scores remain high variance.`;
+  $('over25').textContent=(over*100).toFixed(1)+'%';
+  $('btts').textContent=(btts*100).toFixed(1)+'%';
+  const names=[$('homeTeam').value.trim()||'Home team','Draw',$('awayTeam').value.trim()||'Away team'];
+  const probs=[ph,pd,pa];
+  const validOdds=odds.every(o=>Number.isFinite(o)&&o>1);
+  if(validOdds){
+    const rows=odds.map((o,i)=>{
+      const implied=1/o, edge=(probs[i]-implied)*100, ev=(probs[i]*o-1)*100;
+      const tag=edge>=5?'Potential value':edge>0?'Small model edge':'No model edge';
+      return `<div class="historyitem"><strong>${escapeHtml(names[i])}</strong><p>Model: ${(probs[i]*100).toFixed(1)}% · Raw implied: ${(implied*100).toFixed(1)}%</p><p>Estimated edge: ${edge>0?'+':''}${edge.toFixed(1)} percentage points · Expected ROI: ${ev>0?'+':''}${ev.toFixed(1)}%</p><small>At odds ${o.toFixed(2)} · ${tag}</small></div>`;
+    }).join('');
+    $('valueRows').innerHTML=rows;
+  } else {
+    $('valueRows').textContent='Enter valid odds above 1.00 for all three outcomes to compare value.';
+  }
+  const maxP=Math.max(ph,pd,pa), idx=[ph,pd,pa].indexOf(maxP);
+  $('intelVerdict').textContent=`Model lean: ${names[idx]} (${(maxP*100).toFixed(1)}%)`;
+  $('intelExplain').textContent=`Inputs: ${$('homeTeam').value.trim()||'Home'} xG ${hx.toFixed(2)} vs ${$('awayTeam').value.trim()||'Away'} xG ${ax.toFixed(2)}. This is a Poisson estimate based on your xG inputs, not a verified prediction or a guarantee.`;
+}
+$('runIntel').addEventListener('click',intelCalculate);
+['homeXg','awayXg','homeOdds','drawOdds','awayOdds','homeTeam','awayTeam'].forEach(id=>$(id).addEventListener('input',()=>{}));
+intelCalculate();
+
 </script></body></html>
